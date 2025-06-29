@@ -30,7 +30,7 @@ export default function EditPost() {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/posts/${slug}`,
+      await axios.put(`https://blog-hbjq.onrender.com/api/posts/${slug}`,
         { title, content, category, image },
         {
           headers: {
