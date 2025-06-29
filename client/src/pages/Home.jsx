@@ -6,7 +6,7 @@ export default function Home({ isLoggedIn }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/posts')
+    axios.get('https://blog-hbjq.onrender.com/api/posts')
       .then(res => setPosts(res.data))
       .catch(err => {
         console.error('Failed to fetch posts:', err);
@@ -17,7 +17,7 @@ export default function Home({ isLoggedIn }) {
   const handleDelete = async (slug) => {
     if (!window.confirm('Are you sure you want to delete this post?')) return;
     try {
-      await axios.delete(`/api/posts/${slug}`, {
+      await axios.delete(`https://blog-hbjq.onrender.com/api/posts/${slug}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -43,7 +43,7 @@ export default function Home({ isLoggedIn }) {
       <ul className="space-y-4">
         {posts.map(post => (
           <li key={post.slug} className="border-2 p-4 rounded-2xl">
-            <Link to={`/post/${post.slug}`} className="text-lg font-semibold  hover:underline">
+            <Link to={`https://blog-hbjq.onrender.com/post/${post.slug}`} className="text-lg font-semibold  hover:underline">
             <div className="flex flex-col md:flex-row gap-4">
               {post.image && (
                 <img src={post.image} alt="post" className="w-full md:w-[20vw] h-auto rounded" />
@@ -54,7 +54,7 @@ export default function Home({ isLoggedIn }) {
                 <p className="text-gray-700 text-sm">{getPreviewText(post.content)}</p>
                 {isLoggedIn && (
                   <div className="flex gap-4 mt-2">
-                    <Link to={`/edit/${post.slug}`} className="text-sm text-green-600">Edit</Link>
+                    <Link to={`https://blog-hbjq.onrender.com/edit/${post.slug}`} className="text-sm text-green-600">Edit</Link>
                     <button onClick={() => handleDelete(post.slug)} className="text-sm text-red-600">Delete</button>
                   </div>
                 )}
