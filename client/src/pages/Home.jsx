@@ -44,51 +44,20 @@ export default function Home({ isLoggedIn }) {
 
       <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
         {posts.map(post => (
-          <div
-            key={post.slug}
-            className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
-          >
-            <div className="block md:flex">
-              <Link to={`https://blog-hbjq.onrender.com/post/${post.slug}`} className="md:w-1/3">
-                {post.image && (
-                  <img
-                    src={post.image}
-                    alt="Post Cover"
-                    className="w-full h-60 object-cover"
-                  />
-                )}
-              </Link>
-
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <Link to={`https://blogwwwebsite.netlify.app/post/${post.slug}`}>
-                  <h2 className="text-2xl font-semibold text-blue-700 mb-2 hover:underline">
-                    {post.title}
-                  </h2>
-                </Link>
-                <p className="text-gray-600 text-sm mb-2">
-                  {new Date(post.createdAt).toLocaleDateString()} • {post.category}
-                </p>
-                <p className="text-gray-800 text-sm leading-relaxed">
-                  {getPreviewText(post.content)}
-                </p>
-
+          <li key={post.slug} className="border-2 p-4 rounded-2xl">
+            <Link to={`/post/${post.slug}`} className="text-lg font-semibold  hover:underline">
+            <div className="flex flex-col md:flex-row gap-4">
+              {post.image && (
+                <img src={post.image} alt="post" className="w-full md:w-[20vw] h-auto rounded" />
+              )}
+              <div className="flex-1">
+                  {post.title}
+                <div className="text-sm text-gray-500 mb-1">{new Date(post.createdAt).toLocaleString()}</div>
+                <p className="text-gray-700 text-sm">{getPreviewText(post.content)}</p>
                 {isLoggedIn && (
-                  <div className="mt-4 flex gap-4">
-                    <Link
-                      to={`https://blog-hbjq.onrender.com/edit/${post.slug}`}
-                      className="text-sm text-green-600 hover:underline"
-                    >
-                      ✏️ Edit
-                    </Link>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation(); // Prevent bubbling to Link
-                        handleDelete(post.slug);
-                      }}
-                      className="text-sm text-red-600 hover:underline"
-                    >
-                      🗑️ Delete
-                    </button>
+                  <div className="flex gap-4 mt-2">
+                    <Link to={`/edit/${post.slug}`} className="text-sm text-green-600">Edit</Link>
+                    <button onClick={() => handleDelete(post.slug)} className="text-sm text-red-600">Delete</button>
                   </div>
                 )}
               </div>
