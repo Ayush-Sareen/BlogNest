@@ -31,7 +31,7 @@ export default function EditPost() {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/posts/${slug}`,
+      await axios.put(`https://blog-hbjq.onrender.com/api/posts/${slug}`,
         { title, content, category, image },
         {
           headers: {
@@ -39,7 +39,7 @@ export default function EditPost() {
           },
         }
       );
-      navigate('/');
+      navigate('https://blog-hbjq.onrender.com/');
     } catch (err) {
       console.error('Update failed:', err);
       alert('You are not authorized to update this post.');

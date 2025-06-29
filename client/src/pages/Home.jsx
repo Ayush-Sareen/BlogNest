@@ -44,26 +44,51 @@ export default function Home({ isLoggedIn }) {
 
       <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
         {posts.map(post => (
-          <li key={post.slug} className="border-2 p-4 rounded-2xl">
-            <Link to={`/post/${post.slug}`} className="text-lg font-semibold  hover:underline">
-            <div className="flex flex-col md:flex-row gap-4">
+          <div
+            key={post.slug}
+            className="bg-gradient-to-br from-yellow-50 via-white to-pink-50 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200"
+          >
+            <Link to={`https://blogwwwebsite.netlify.app/post/${post.slug}`} className="block">
               {post.image && (
-                <img src={post.image} alt="post" className="w-full md:w-[20vw] h-auto rounded" />
+                <img
+                  src={post.image}
+                  alt="Post Cover"
+                  className="w-full h-60 object-cover"
+                />
               )}
-              <div className="flex-1">
-                  {post.title}
-                <div className="text-sm text-gray-500 mb-1">{new Date(post.createdAt).toLocaleString()}</div>
-                <p className="text-gray-700 text-sm">{getPreviewText(post.content)}</p>
+
+              <div className="p-5 flex flex-col justify-between">
+                <div>
+                  <h2 className="text-2xl font-semibold text-indigo-700 mb-1 hover:underline">
+                    {post.title}
+                  </h2>
+                  <p className="text-gray-500 text-sm mb-2">
+                    {new Date(post.createdAt).toLocaleDateString()} • {post.category}
+                  </p>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    {getPreviewText(post.content)}
+                  </p>
+                </div>
+
                 {isLoggedIn && (
-                  <div className="flex gap-4 mt-2">
-                    <Link to={`/edit/${post.slug}`} className="text-sm text-green-600">Edit</Link>
-                    <button onClick={() => handleDelete(post.slug)} className="text-sm text-red-600">Delete</button>
+                  <div className="mt-4 flex gap-4">
+                    <Link
+                      to={`https://blog-hbjq.onrender.com/edit/${post.slug}`}
+                      className="text-sm text-green-600 hover:underline"
+                    >
+                      ✏️ Edit
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(post.slug)}
+                      className="text-sm text-red-600 hover:underline"
+                    >
+                      🗑️ Delete
+                    </button>
                   </div>
                 )}
               </div>
-            </div>
+            </Link>
           </div>
-
         ))}
 
         {posts.length === 0 && (
