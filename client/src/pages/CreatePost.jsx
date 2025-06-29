@@ -15,7 +15,7 @@ export default function CreatePost() {
     e.preventDefault();
     try {
       await axios.post(
-        '/api/posts/create',
+        'https://blog-hbjq.onrender.com/api/posts/create',
         { title, content, category, image },
         {
           headers: {
