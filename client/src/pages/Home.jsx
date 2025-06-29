@@ -46,40 +46,45 @@ export default function Home({ isLoggedIn }) {
         {posts.map(post => (
           <div
             key={post.slug}
-            className="bg-gradient-to-br from-yellow-50 via-white to-pink-50 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200"
+            className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
           >
-            <Link to={`https://blogwwwebsite.netlify.app/post/${post.slug}`} className="block">
-              {post.image && (
-                <img
-                  src={post.image}
-                  alt="Post Cover"
-                  className="w-full h-60 object-cover"
-                />
-              )}
+            <div className="block md:flex">
+              <Link to={`/post/${post.slug}`} className="md:w-1/3">
+                {post.image && (
+                  <img
+                    src={post.image}
+                    alt="Post Cover"
+                    className="w-full h-60 object-cover"
+                  />
+                )}
+              </Link>
 
-              <div className="p-5 flex flex-col justify-between">
-                <div>
-                  <h2 className="text-2xl font-semibold text-indigo-700 mb-1 hover:underline">
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <Link to={`/post/${post.slug}`}>
+                  <h2 className="text-2xl font-semibold text-blue-700 mb-2 hover:underline">
                     {post.title}
                   </h2>
-                  <p className="text-gray-500 text-sm mb-2">
-                    {new Date(post.createdAt).toLocaleDateString()} • {post.category}
-                  </p>
-                  <p className="text-gray-700 text-sm leading-relaxed">
-                    {getPreviewText(post.content)}
-                  </p>
-                </div>
+                </Link>
+                <p className="text-gray-600 text-sm mb-2">
+                  {new Date(post.createdAt).toLocaleDateString()} • {post.category}
+                </p>
+                <p className="text-gray-800 text-sm leading-relaxed">
+                  {getPreviewText(post.content)}
+                </p>
 
                 {isLoggedIn && (
                   <div className="mt-4 flex gap-4">
                     <Link
-                      to={`https://blog-hbjq.onrender.com/edit/${post.slug}`}
+                      to={`/edit/${post.slug}`}
                       className="text-sm text-green-600 hover:underline"
                     >
                       ✏️ Edit
                     </Link>
                     <button
-                      onClick={() => handleDelete(post.slug)}
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent bubbling to Link
+                        handleDelete(post.slug);
+                      }}
                       className="text-sm text-red-600 hover:underline"
                     >
                       🗑️ Delete
@@ -87,7 +92,7 @@ export default function Home({ isLoggedIn }) {
                   </div>
                 )}
               </div>
-            </Link>
+            </div>
           </div>
         ))}
 
