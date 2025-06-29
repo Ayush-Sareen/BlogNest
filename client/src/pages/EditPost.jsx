@@ -24,7 +24,7 @@ export default function EditPost() {
       .catch((err) => {
         console.error('Failed to fetch post:', err);
         alert('Could not load post.');
-        navigate('https://blog-hbjq.onrender.com/');
+        navigate('/');
       });
   }, [slug, navigate]);
 
@@ -39,7 +39,7 @@ export default function EditPost() {
           },
         }
       );
-      navigate('https://blog-hbjq.onrender.com/');
+      navigate('/');
     } catch (err) {
       console.error('Update failed:', err);
       alert('You are not authorized to update this post.');
