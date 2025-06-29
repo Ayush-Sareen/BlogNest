@@ -13,24 +13,26 @@ export default function EditPost() {
   const [image, setImage] = useState('');
 
   useEffect(() => {
-    axios.get(`/api/posts/${slug}`)
-      .then(res => {
+    axios
+      .get(`https://blog-hbjq.onrender.com/api/posts/${slug}`)
+      .then((res) => {
         setTitle(res.data.title);
         setContent(res.data.content);
         setCategory(res.data.category || '');
         setImage(res.data.image || '');
       })
-      .catch(err => {
+      .catch((err) => {
         console.error('Failed to fetch post:', err);
         alert('Could not load post.');
-        navigate('/');
+        navigate('https://blog-hbjq.onrender.com/');
       });
   }, [slug, navigate]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/posts/${slug}`,
+      await axios.put(
+        `https://blog-hbjq.onrender.com/api/posts/${slug}`,
         { title, content, category, image },
         {
           headers: {
@@ -46,21 +48,23 @@ export default function EditPost() {
   };
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">Edit Post</h2>
-      <form onSubmit={handleUpdate} className="space-y-4">
+    <div className="max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow-xl mt-8">
+      <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">Edit Blog Post</h2>
+      <form onSubmit={handleUpdate} className="space-y-5">
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full border p-2 rounded"
+          className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="Title"
           required
         />
 
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="border p-2 rounded w-full"
+          className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
         >
           <option value="">Select Category</option>
           <option value="Tech">Tech</option>
@@ -73,12 +77,18 @@ export default function EditPost() {
           value={image}
           onChange={(e) => setImage(e.target.value)}
           placeholder="Image URL"
-          className="border p-2 rounded w-full"
+          className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
 
-        <ReactQuill value={content} onChange={setContent} className="bg-white" />
-        <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">
-          Update
+        <div className="bg-white border border-gray-300 rounded-lg overflow-hidden">
+          <ReactQuill value={content} onChange={setContent} className="h-64" />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-300"
+        >
+          ✅ Update Post
         </button>
       </form>
     </div>

@@ -15,7 +15,7 @@ export default function CreatePost() {
     e.preventDefault();
     try {
       await axios.post(
-        '/api/posts/create',
+        'https://blog-hbjq.onrender.com/api/posts/create',
         { title, content, category, image },
         {
           headers: {
@@ -31,22 +31,22 @@ export default function CreatePost() {
   };
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">Create Post</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow-xl mt-8">
+      <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">Create a New Blog Post</h2>
+      <form onSubmit={handleSubmit} className="space-y-5">
         <input
           type="text"
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full border p-2 rounded"
+          className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           required
         />
 
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="border p-2 rounded w-full"
+          className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           required
         >
           <option value="">Select Category</option>
@@ -60,13 +60,18 @@ export default function CreatePost() {
           value={image}
           onChange={(e) => setImage(e.target.value)}
           placeholder="Image URL"
-          className="border p-2 rounded w-full"
+          className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
 
-        <ReactQuill value={content} onChange={setContent} className="bg-white" />
+        <div className="bg-white border border-gray-300 rounded-lg overflow-hidden">
+          <ReactQuill value={content} onChange={setContent} className="h-64" />
+        </div>
 
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
-          Publish
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-300"
+        >
+          📝 Publish Post
         </button>
       </form>
     </div>
