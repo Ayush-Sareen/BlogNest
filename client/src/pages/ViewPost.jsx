@@ -8,7 +8,7 @@ export default function ViewPost() {
     const [post, setPost] = useState(null);
 
     useEffect(() => {
-        axios.get(`/api/posts/${slug}`).then(res => setPost(res.data));
+        axios.get(`https://blog-hbjq.onrender.com/api/posts/${slug}`).then(res => setPost(res.data));
     }, [slug]);
 
     if (!post) return <div>Loading...</div>;
