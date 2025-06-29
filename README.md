@@ -72,10 +72,8 @@ This is a **full-stack Blog Management System** where only the **admin** can cre
 
 ## 🔐 Admin Credentials
 
-> Used only for testing (in `.env` file or server route):
-
-Username: admin
-Password: admin123
+- Username: admin
+- Password: admin123
 
 ---
 
