@@ -43,7 +43,7 @@ export default function Home({ isLoggedIn }) {
       <ul className="space-y-4">
         {posts.map(post => (
           <li key={post.slug} className="border-2 p-4 rounded-2xl">
-            <Link to={`https://blog-hbjq.onrender.com/post/${post.slug}`} className="text-lg font-semibold  hover:underline">
+            <Link to={`https://blogwwwebsite.netlify.app/post/${post.slug}`} className="text-lg font-semibold  hover:underline">
             <div className="flex flex-col md:flex-row gap-4">
               {post.image && (
                 <img src={post.image} alt="post" className="w-full md:w-[20vw] h-auto rounded" />
