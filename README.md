@@ -2,6 +2,13 @@
 
 🚀 Live Demo: [https://blogwwwebsite.netlify.app](https://blogwwwebsite.netlify.app)
 
+## 📺 Demo Video
+
+[![Watch on YouTube](https://img.youtube.com/vi/HelEk3rZkwE/0.jpg)](https://www.youtube.com/watch?v=HelEk3rZkwE)
+
+> Click the thumbnail above or [watch the full demo here](https://www.youtube.com/watch?v=HelEk3rZkwE)
+
+
 login credentials ->
 - username -> admin
 - password -> admin123
@@ -50,7 +57,7 @@ This is a **full-stack Blog Management System** where only the **admin** can cre
 ---
 
 ## 📁 Folder Structure
-
+```
 /client # React frontend
 └── pages/
 ├── Home.jsx
@@ -67,7 +74,7 @@ This is a **full-stack Blog Management System** where only the **admin** can cre
 └── Post.js
 └── middleware/
 └── auth.js
-
+```
 ---
 
 ## 🔐 Admin Credentials
